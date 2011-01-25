@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article id="follow-user">
+    <header><h1>Unfollow {{ escape(user.username) }}?</h1></header>
+    <section class="question">
+        <p>Do you really want to unfollow this user?</p>
+        <form action="" method="POST">
+            <input type="hidden" value="{{ next }}"/>
+            <input type="submit" value="YES" name="choice"/>
+            <input type="submit" value="NO" name="choice"/>
+        </form>
+    </section>
+</article>
+{% end %}
+

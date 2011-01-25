@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block header %}<h1>Cleartext Microblogging</h1>{% end %}
+
+{% block content %}
+<article id="index">
+    {% if current_user %}
+    <section id="text">
+        <form action="/post/" method="POST">
+            <textarea name="text">Write your text here.</textarea>
+            <input type="submit" value="Post it!" />
+        </form>
+    </section>
+        {% if current_user.friend_tweets %}
+        <section class="friend-tweets">
+            <header><h1>Friend Tweets</h1></header>
+            <dl class="tweets">
+            {% for tweet in current_user.friend_tweets[:20] %}
+                <dt>By @<a href="{{ reverse_url('user', tweet.username) }}">{{ escape(tweet.username) }}</a> at {{ tweet.created_at }}:</dt>
+                <dd>{{ escape(tweet.text) }}</dd>
+            {% end %}
+            </dl>
+        </section>
+        {% end %}
+    {% end %}
+    <section id="users">
+        <h1>Users</h1>
+        <ul>
+            {% for user in users %}
+                <li><a href="/user/{{ url_escape(user.username) }}/">{{ escape(user.username) }}</a></li>
+            {% end %}
+        </ul>
+    </section>
+</article>
+{% end %}

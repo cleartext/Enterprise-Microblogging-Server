@@ -1,0 +1,7 @@
+.*.swp
+*.pyc
+*.log
+.installed.cfg
+*.egg-info
+env
+python

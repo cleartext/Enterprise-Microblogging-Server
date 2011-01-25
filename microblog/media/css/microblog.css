@@ -1,0 +1,41 @@
+body > header > h1 {
+    text-align: center;
+    color: green;
+}
+body > header > h2 {
+    float: right;
+    color: blue;
+    font-size: 0.75em;
+}
+section#users {
+    display: block;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+section#users > h1 {
+    color: orange;
+}
+section#users > ul {
+    padding: 0;
+}
+section#users > ul > li {
+    list-style-type: none;
+    font-size: 2em;
+    line-height: 1.5em;
+}
+section#users > ul > li > a {
+    color: black;
+}
+
+section#text {
+    display: block;
+    margin-left: 100px;
+    margin-right: 500px;
+    text-align: right;
+}
+section#text textarea {
+    width: 100%;
+}
+section#text input {
+    margin-top: 1em;
+}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article id="user">
+    <section class="vcard">
+        {% if mypage %}
+            <header><h1>Your profile.</h1></header>
+        {% else %}
+            <header><h1>{{ escape(user.username) }}'s profile.</h1></header>
+            {% if current_user and user not in current_user.contacts %}
+                <a href="{{ reverse_url('follow', user.username) }}?next={{ request.uri }}">Follow</a>
+            {% else %}
+                <p>You already follow this person. <a href="{{ reverse_url('unfollow', user.username) }}?next={{ request.uri }}">Unfollow</a>.</p>
+            {% end %}
+        {% end %}
+        {% if vcard %}
+            {% if vcard.PHOTO %}<img class="avatar" src="avatar/" />{% end %}
+            <dl>
+                {% if vcard.FN %}<dt>First name:</dt><dd>{{ escape(vcard.FN) }}</dd>{% end %}
+                {% if vcard.NICKNAME %}<dt>Nickname:</dt><dd>{{ escape(vcard.NICKNAME) }}</dd>{% end %}
+            </dl>
+        {% else %}
+            <p>No vCard.</p>
+        {% end %}
+    </section>
+    {% if user.tweets %}
+    <section class="tweets">
+        <header><h1>Tweets</h1></header>
+        <dl class="tweets">
+        {% for tweet in user.tweets[:20] %}
+            <dt>At {{ tweet.created_at }}:</dt>
+            <dd>{{ escape(tweet.text) }}</dd>
+        {% end %}
+        </dl>
+    </section>
+    {% end %}
+    <section class="followers">
+        <header><h1>Followers</h1></header>
+        <ul>
+            {% for obj in user.subscribers %}
+                <li><a href="{{ reverse_url('user', obj.username) }}">{{ escape(obj.username) }}</a>{% if mypage %}, {% if obj in current_user.contacts %}<a href="{{ reverse_url('unfollow', obj.username) }}?next={{ request.uri }}">unfollow</a>{% else %}<a href="{{ reverse_url('follow', obj.username) }}?next={{ request.uri }}">follow</a>{% end %}{% end %}</li>
+            {% end %}
+        </ul>
+    </section>
+    <section class="friends">
+        <header><h1>Friends</h1></header>
+        <ul>
+            {% for obj in user.contacts %}
+                <li><a href="{{ reverse_url('user', obj.username) }}">{{ escape(obj.username) }}</a>{% if mypage %}, <a href="{{ reverse_url('unfollow', obj.username) }}?next={{ request.uri }}">unfollow</a>{% end %}</li>
+            {% end %}
+        </ul>
+    </section>
+</article>
+{% end %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article id="login">
+    <header><h1>Login</h1></header>
+    <section id="form">
+        <form action="" method="post">
+            <label for="username">Username:</label> <input type="text" name="username"/>
+            {% if errors['username'] %}<p class="error">{{ errors['username'] }}</p>{% end %}
+            <label for="password">Password:</label> <input type="password" name="password"/>
+            {% if errors['password'] %}<p class="error">{{ errors['password'] }}</p>{% end %}
+            {% if next %}<input type="hidden" name="next" value="{{ next }}"/>{% end %}
+            <input type="submit" value="Login">
+        </form>
+    </section>
+</article>
+{% end %}

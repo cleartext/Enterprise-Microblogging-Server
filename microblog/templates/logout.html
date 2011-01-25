@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article id="logout">
+    <header><h1>Logout</h1></header>
+    <section id="form">
+        Do you really want to logout?
+        <form action="" method="post">
+            {% if next %}<input type="hidden" name="next" value="{{ next }}"/>{% end %}
+            <input type="submit" value="Yea!">
+        </form>
+    </section>
+</article>
+{% end %}
+

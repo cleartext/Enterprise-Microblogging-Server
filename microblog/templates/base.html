@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cleartext Microblogging</title>
+        <link rel="stylesheet" href="{{ static_url("css/microblog.css") }}"></link>
+    </head>
+    <body>
+        <header>
+        {% block login %}<h2>{% if current_user %}Welcome, <a href="{{ reverse_url('user', current_user.username) }}">{{ current_user.username }}</a>! <a href="/logout/">logout</a>{% else %}<a href="/login/">Login</a>{% end %}</h2>{% end %}
+        {% block header %}<h1><a href="/">Cleartext Microblogging</a></h1>{% end %}
+        </header>
+        {% block content %}{% end %}
+    </body>
+</html>
